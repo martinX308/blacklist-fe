@@ -1,7 +1,6 @@
-import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,28 +9,49 @@ import { AuthService } from '../../services/auth.service';
 })
 
 export class LoginComponent implements OnInit {
-  title = 'app';
-  loading = true;
-  anon: boolean;
-  user: any;
+  
+  feedbackEnabled = false;
+  error = null;
+  processing = false;
+  // ... model (e,g. username: String)
+  username: String;
+  password: String;
+  loginDetails:{};
+  
 
-  constructor(
-    private authService: AuthService,
-    private router: Router
-  ) {}
+  constructor( private authService: AuthService,private router:Router) {}
 
-  ngOnInit() {
-    this.authService.userChange$.subscribe((user) => {
-      this.loading = false;
-      this.user = user;
-      this.anon = !user;
-    });
-  }
+  ngOnInit() { };
 
-  logout() {
-    this.authService.logout()
-      .then(() => this.router.navigate(['/login']));
+  submitForm(form) {
+    this.error = '';
+    this.feedbackEnabled = true;
+    this.loginDetails={
+      username: this.username,
+      password: this.username
+      };
+    if (form.valid) {
+      this.processing = true;
+      this.authService.login(this.loginDetails)
+        .then((result) => {
+          console.log(result);
+          this.router.navigate(['/']);
+          this.processing = false;
+          // ... handle result, reset form, etc...
+          // ... navigate with this.router.navigate(['...'])
+          // ... maybe turn this to false if your're staying on the page - this.processing = false;
+        })
+        .catch((err) => {
+          this.error = err.error.error; 
+          this.processing = false;
+          this.feedbackEnabled = false;
+        });
+    }
   }
 }
+
+
+
+
 
 
