@@ -19,14 +19,14 @@ import { AuthService } from './services/auth.service';
 // -- pages
 import { HomepageComponent } from './pages/homepage/homepage.component';
 import { SignupPageComponent } from './pages/signup-page/signup-page.component';
+import { MyViewComponent } from './pages/my-view/my-view.component';
 
 // routes
 const routes: Routes = [
-  { path: '',  component: HomepageComponent, canActivate: [ InitAuthGuardService ] },
-  // { path: 'login',  component: LoginComponent, canActivate: [ RequireAnonGuardService ] },
+  { path: '',  component: HomepageComponent, canActivate: [ InitAuthGuardService, RequireAnonGuardService] },
   { path: 'signup',  component:SignupPageComponent , canActivate: [ RequireAnonGuardService ] },
- // { path: 'page',  component: ... , canActivate: [ RequireUserGuardService ] },
- { path: '**', redirectTo: '' }
+  { path: 'my-view',  component: MyViewComponent , canActivate: [ RequireUserGuardService ] },
+  { path: '**', redirectTo: '' }
 ];
 
 // don't forget to register the guards (and the AuthService) in the providers
@@ -37,7 +37,8 @@ const routes: Routes = [
     HomepageComponent,
     SignupPageComponent,
     SignupComponent,
-    LoginComponent
+    LoginComponent,
+    MyViewComponent
   ],
   imports: [
     BrowserModule,

@@ -25,10 +25,10 @@ export class SignupComponent implements OnInit {
     this.feedbackEnabled = true;
     if (form.valid) {
       this.processing = true;
-      this.authService.login(this.signupDetails)
+      this.authService.signup({username:this.username, password:this.password})
         .then((result) => {
           console.log(result);
-          this.router.navigate(['/']);
+          this.router.navigate(['/my-view']);
           this.processing = false;
           // ... handle result, reset form, etc...
           // ... maybe turn this to false if your're staying on the page - this.processing = false;

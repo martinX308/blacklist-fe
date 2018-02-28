@@ -1,4 +1,4 @@
-<h4>Singup</h4>
+<h4>Register here:</h4>
 <form (ngSubmit)="submitForm(form)" #form="ngForm" novalidate [ngClass]="{'is-processing': processing}">
 
     <div class="field" [ngClass]="{'has-error': feedbackEnabled && usernameField.errors}">
@@ -23,6 +23,9 @@
       <button type="submit" [disabled]="processing">Signup</button>
       <div *ngIf="feedbackEnabled && form.invalid">
         <p class="validation">there are errors in the form, please review the fields</p>
+      </div>
+      <div *ngIf = "error">
+        <p class="validation">{{error}} </p>
       </div>
     </div>
   </form>

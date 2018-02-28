@@ -17,7 +17,8 @@ export class LoginComponent implements OnInit {
   username: String;
   password: String;
   loginDetails:{};
-  
+  errorStatus: String;
+  errorMessage: String;
 
   constructor( private authService: AuthService,private router:Router) {}
 
@@ -28,17 +29,18 @@ export class LoginComponent implements OnInit {
     this.feedbackEnabled = true;
     this.loginDetails={
       username: this.username,
-      password: this.username
+      password: this.password
       };
     if (form.valid) {
       this.processing = true;
       this.authService.login(this.loginDetails)
         .then((result) => {
           console.log(result);
-          this.router.navigate(['/']);
+           // if(result.status )
+          this.router.navigate(['/my-view']);
           this.processing = false;
+
           // ... handle result, reset form, etc...
-          // ... navigate with this.router.navigate(['...'])
           // ... maybe turn this to false if your're staying on the page - this.processing = false;
         })
         .catch((err) => {
