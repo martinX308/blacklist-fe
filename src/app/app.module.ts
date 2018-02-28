@@ -8,13 +8,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { LoginComponent } from './components/login/login.component';
+import { MgmtDashboardComponent } from './components/mgmt-dashboard/mgmt-dashboard.component';
+import { AccountDetailsComponent } from './components/account-details/account-details.component';
+import { ApiDescriptionComponent } from './components/api-description/api-description.component';
 
 // -- guards and services
 import { RequireAnonGuardService } from './guards/require-anon-guard.service';
 import { RequireUserGuardService } from './guards/require-user-guard.service';
 import { InitAuthGuardService } from './guards/init-auth-guard.service';
 import { AuthService } from './services/auth.service';
-
+import {ApplicationGeneratorService} from './services/application-generator.service';
 
 // -- pages
 import { HomepageComponent } from './pages/homepage/homepage.component';
@@ -38,7 +41,10 @@ const routes: Routes = [
     SignupPageComponent,
     SignupComponent,
     LoginComponent,
-    MyViewComponent
+    MyViewComponent,
+    MgmtDashboardComponent,
+    AccountDetailsComponent,
+    ApiDescriptionComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +52,7 @@ const routes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [RequireAnonGuardService, RequireUserGuardService, InitAuthGuardService, AuthService],
+  providers: [RequireAnonGuardService, RequireUserGuardService, InitAuthGuardService, AuthService,ApplicationGeneratorService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './my-view.component.html',
   styleUrls: ['./my-view.component.css']
 })
+
 export class MyViewComponent implements OnInit {
   userId: String;
 
@@ -15,7 +16,5 @@ export class MyViewComponent implements OnInit {
   ngOnInit() {
     this.route.params
       .subscribe((params) => this.userId = params['Uid']);
-
   }
-
 }
