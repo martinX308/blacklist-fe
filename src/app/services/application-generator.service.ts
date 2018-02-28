@@ -8,7 +8,7 @@ import 'rxjs/add/operator/toPromise';
 export class ApplicationGeneratorService {
   private application: string;
 
-  private API_URL = 'http://localhost:3000/api/application';
+  private API_URL = 'http://localhost:3000/api/customer-apps';
 
   constructor(private httpClient: HttpClient) { }
 
@@ -22,8 +22,16 @@ export class ApplicationGeneratorService {
       user
     }
     return this.httpClient.post(`${this.API_URL}/create`, configuration, options)
-      .toPromise()
-      .then((data) => this.setUser(data));
+      .toPromise();
+  }
+
+  getList (user:any): Promise<any> {
+    const options = {
+      withCredentials: true
+    };
+  
+    return this.httpClient.get(`${this.API_URL}/getList/${user}`, options)
+      .toPromise();
   }
 
 }

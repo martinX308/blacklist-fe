@@ -15,12 +15,15 @@ export class AccountDetailsComponent implements OnInit {
   error = null;
   processing = false;
   application: string;
+  applicationList:Array <{}> = [];
 
   constructor(private route: ActivatedRoute, private applicationGenerator:ApplicationGeneratorService) { }
 
   ngOnInit() {
     this.route.params
     .subscribe((params) => this.userId = params['Uid']);
+
+    this.getApplications ();
   }
 
   submitForm(form) {
@@ -31,10 +34,8 @@ export class AccountDetailsComponent implements OnInit {
       this.applicationGenerator.generate(this.application,this.userId)
         .then((result) => {
           console.log(result);
-           // if(result.status )
-          this.router.navigate([`/my-view/${result._id}`]);
+          this.getApplications ();
           this.processing = false;
-
           // ... handle result, reset form, etc...
           // ... maybe turn this to false if your're staying on the page - this.processing = false;
         })
@@ -45,5 +46,22 @@ export class AccountDetailsComponent implements OnInit {
         });
     }
   }
+
+  getApplications () {
+    this.error = '';
+    this.applicationGenerator.getList(this.userId)
+        .then((result) => {
+          console.log(result);
+          this.applicationList = result;
+          // ... handle result, reset form, etc...
+          // ... maybe turn this to false if your're staying on the page - this.processing = false;
+        })
+        .catch((err) => {
+          this.error = err.error.error; 
+    });
+    
+  }
+
+
 
 }
