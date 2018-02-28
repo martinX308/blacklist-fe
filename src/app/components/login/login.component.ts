@@ -17,7 +17,6 @@ export class LoginComponent implements OnInit {
   username: String;
   password: String;
   loginDetails:{};
-  errorStatus: String;
   errorMessage: String;
 
   constructor( private authService: AuthService,private router:Router) {}
@@ -37,7 +36,7 @@ export class LoginComponent implements OnInit {
         .then((result) => {
           console.log(result);
            // if(result.status )
-          this.router.navigate(['/my-view']);
+          this.router.navigate([`/my-view/${result._id}`]);
           this.processing = false;
 
           // ... handle result, reset form, etc...

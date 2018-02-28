@@ -25,7 +25,7 @@ import { MyViewComponent } from './pages/my-view/my-view.component';
 const routes: Routes = [
   { path: '',  component: HomepageComponent, canActivate: [ InitAuthGuardService, RequireAnonGuardService] },
   { path: 'signup',  component:SignupPageComponent , canActivate: [ RequireAnonGuardService ] },
-  { path: 'my-view',  component: MyViewComponent , canActivate: [ RequireUserGuardService ] },
+  { path: 'my-view/:Uid',  component: MyViewComponent , canActivate: [ RequireUserGuardService ] },
   { path: '**', redirectTo: '' }
 ];
 

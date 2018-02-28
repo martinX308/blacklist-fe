@@ -28,7 +28,7 @@ export class SignupComponent implements OnInit {
       this.authService.signup({username:this.username, password:this.password})
         .then((result) => {
           console.log(result);
-          this.router.navigate(['/my-view']);
+          this.router.navigate([`/my-view/${result._id}`]);
           this.processing = false;
           // ... handle result, reset form, etc...
           // ... maybe turn this to false if your're staying on the page - this.processing = false;
