@@ -40,11 +40,10 @@ export class MgmtDashboardComponent implements OnInit {
             responseCount:0
           };  
         }
+        arrayList[object.api]["responseCount"]++;
         if (object.response === "true") {  
           arrayList[object.api]["positiveCount"]++; 
-          return arrayList;
         }
-        arrayList[object.api]["responseCount"]++;
         return arrayList;
       },{});
 
