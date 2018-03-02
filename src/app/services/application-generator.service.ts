@@ -30,8 +30,16 @@ export class ApplicationGeneratorService {
       withCredentials: true
     };
   
-    return this.httpClient.get(`${this.API_URL}/getList/${user}`, options)
+    return this.httpClient.get(`${this.API_URL}/getList`, options)
       .toPromise();
   }
 
+  getApiData (user:any): Promise<any> {
+    const options = {
+      withCredentials: true
+    };
+  
+    return this.httpClient.get(`${this.API_URL}/mylog/${user}`, options)
+      .toPromise();
+  }
 }
