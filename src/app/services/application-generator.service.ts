@@ -39,7 +39,7 @@ export class ApplicationGeneratorService {
       withCredentials: true
     };
   
-    return this.httpClient.get(`${this.API_URL}/mylog/${user}`, options)
+    return this.httpClient.get(`${this.API_URL}/mylog`, options)
       .toPromise();
   }
 }

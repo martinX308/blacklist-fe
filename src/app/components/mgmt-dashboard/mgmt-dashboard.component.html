@@ -1,2 +1,12 @@
 <h4> The API management dashboard</h4>
-<p> under construction ...</p>
+<div *ngIf ="apiRequestLog.length < 1; else dashboard ">
+  there is no content yet
+</div>
+
+<ng-template  #dashboard>
+  <ul>
+    <li *ngFor = "let response of apiRequestLog ">
+      {{response.api}} response: {{response.response}}
+    </li>
+  </ul>
+</ng-template>

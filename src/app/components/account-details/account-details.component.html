@@ -1,7 +1,7 @@
 <h3>Account - details</h3>
 
 <h4>List of existing applications</h4>
-<ul *ngIf="applicationList.length>0"> 
+<ul *ngIf="applicationList.length>0; else noApplication "> 
     <li *ngFor ="let application of applicationList">
       Name: {{application.applicationName}} 
       <p>Key: {{application.apiKey.token}} </p>
@@ -9,6 +9,11 @@
     </li>
 </ul>
 
+<ng-template  #noApplication>
+  <p>there are no applications yet</p>
+</ng-template>
+
+<h4>New application</h4>
 <p>Add a new application and generate an API key</p>
 
 <form (ngSubmit)="submitForm(form)" #form="ngForm" novalidate [ngClass]="{'is-processing': processing}">

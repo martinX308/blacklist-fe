@@ -17,7 +17,9 @@ export class AccountDetailsComponent implements OnInit {
   application: string;
   applicationList:Array <{}> = [];
 
-  constructor(private route: ActivatedRoute, private applicationGenerator:ApplicationGeneratorService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private applicationGenerator:ApplicationGeneratorService ) { }
 
   ngOnInit() {
     this.route.params
