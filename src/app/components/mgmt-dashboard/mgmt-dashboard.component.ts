@@ -14,7 +14,8 @@ import {ApplicationGeneratorService} from '../../services/application-generator.
 export class MgmtDashboardComponent implements OnInit {
   userId: string;
   error = null;
-  apiRequestLog = [];
+  apiRequestLog: object = {};
+  apiList: Array<string> = [];
 
   constructor( 
     private route: ActivatedRoute,
@@ -32,7 +33,23 @@ export class MgmtDashboardComponent implements OnInit {
     this.applicationGenerator.getApiData(this.userId)
     .then((result) => {
       console.log(result);
-      this.apiRequestLog = result;
+      const apiKeyList = result.reduce((arrayList,object)=> {
+        if (arrayList[object.api]===undefined) {
+          arrayList[object.api]  = {
+            positiveCount:0,
+            responseCount:0
+          };  
+        }
+        if (object.response === "true") {  
+          arrayList[object.api]["positiveCount"]++; 
+          return arrayList;
+        }
+        arrayList[object.api]["responseCount"]++;
+        return arrayList;
+      },{});
+
+      this.apiRequestLog = apiKeyList;
+      this.apiList= Object.keys(apiKeyList);
     })
     .catch((err) => {
       this.error = err.error.error; 

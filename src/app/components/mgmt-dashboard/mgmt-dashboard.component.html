@@ -4,9 +4,18 @@
 </div>
 
 <ng-template  #dashboard>
-  <ul>
-    <li *ngFor = "let response of apiRequestLog ">
-      {{response.api}} response: {{response.response}}
-    </li>
-  </ul>
+  <table >
+    <tr>
+      <th>api</th>
+      <th>number of requests</th>
+      <th>positive responses [%]</th>
+    </tr>
+    <tr *ngFor = "let apiName of apiList, let i = index">
+      <td>{{apiName}}</td>
+      <td>{{apiRequestLog[apiName]["responseCount"]}}</td>
+      <td>{{apiRequestLog[apiName]["positiveCount"]/apiRequestLog[apiName]["responseCount"]}}</td>
+      <!-- <td>{{apiDetails[apiList[i]].["responseCount"]}}</td>
+      <td>{{apiDetails[apiList[i]].["positiveCount"]/apiDetails[apiList[i]].["responseCount"]}}</td> -->
+    </tr>
+  </table>
 </ng-template>
