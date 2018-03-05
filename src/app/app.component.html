@@ -12,13 +12,12 @@
               <span class="username text">loading...</span>
             </div>
             <div *ngIf="!loading && !!user">
-              <a [routerLink]="['/profile']">{{user.username}}</a>
+              <span>{{user.username}}</span>
               <a (click)="logout()">logout</a>
             </div>
-            <div *ngIf="!loading && anon">
-              <a [routerLink]="['/login']">login</a>
-              <a [routerLink]="['/signup']">signup</a>
-            </div>
+            <!-- <div *ngIf="!loading && anon">
+              <a [routerLink]="['/contact']"></a>
+            </div> -->
         </div>
     </nav>
 
@@ -31,6 +30,6 @@
 
 <footer id="site-footer">
   <div class="container">
-    nice footer
+    <span>Copyright</span>
   </div>
 </footer>
