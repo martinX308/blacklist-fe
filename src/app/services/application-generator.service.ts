@@ -4,11 +4,14 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/toPromise';
 
+import { environment } from '../../environments/environment';
+
+
 @Injectable()
 export class ApplicationGeneratorService {
   private application: string;
 
-  private API_URL = 'http://localhost:3000/api/customer-apps';
+  private API_URL = environment.apiUrl+'/api/customer-apps';
 
   constructor(private httpClient: HttpClient) { }
 
