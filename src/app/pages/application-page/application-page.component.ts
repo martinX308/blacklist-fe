@@ -11,24 +11,29 @@ import {ApplicationDataService} from '../../services/application-data.service';
 export class ApplicationPageComponent implements OnInit {
   userId:string;
   apiKey:string;
-  postings:Array<any>;
+  apiSecret:string;
+  postings:Array<any>= [];
 
   constructor(private route: ActivatedRoute, private appService: ApplicationDataService) { }
   
   ngOnInit() {
     this.route.params
       .subscribe((params) => this.apiKey = params['token']);
+    this.route.queryParams
+      .subscribe((queryParams) => {
+        this.apiSecret = queryParams['secret'];
+    });
     this.route.params
       .subscribe((params) => this.userId = params['Uid']);
+
     this.getPostedData();
   }
 
   getPostedData () {
-    this.appService.getApiData(this.apiKey)
+    this.appService.getApiData(this.apiKey,this.apiSecret)
       .then(result => {
         console.log(result);
         this.postings = result;
       });
   }
-
 }

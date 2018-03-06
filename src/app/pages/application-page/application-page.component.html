@@ -1,6 +1,14 @@
 <p>
   application-page works!
 </p>
-
 <a [routerLink]="['/my-view',userId]"> Back to my-view </a>
 
+<table *ngIf = "postings.length>0; else noRequests">
+  <tr *ngFor = "let post of postings">
+    <td> {{post.ddNumber}}</td>
+  </tr>
+</table>
+
+<ng-template  #noRequests>
+    <p>there is no request data yet</p>
+  </ng-template>

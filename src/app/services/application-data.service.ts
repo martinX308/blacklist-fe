@@ -13,11 +13,12 @@ export class ApplicationDataService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getApiData (apiKey:any): Promise<any> {
+  getApiData (apiKey:string,apiSecret:string): Promise<any> {
+    const keys = btoa(apiKey+":"+apiSecret);
     const options = {
       withCredentials: true,
       headers: {
-        authtoken:apiKey
+        "authorization":keys
       }
     };
   
