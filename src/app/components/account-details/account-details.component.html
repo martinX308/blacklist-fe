@@ -6,8 +6,12 @@
       Name: {{application.applicationName}} 
       <p>Key: {{application.apiKey.token}} </p>
       <p>Secret: {{application.apiSecret.token}} </p>
+      <a [routerLink]="['view-api', application.apiKey.token]">
+       review dataset(link) </a>
+       <a [routerLink]="['create-case', application.apiKey.token]">
+        add fraud case (link) </a>
     </li>
-</ul>
+</ul>s
 
 <ng-template  #noApplication>
   <p>there are no applications yet</p>
