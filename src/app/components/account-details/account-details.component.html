@@ -2,10 +2,10 @@
 
 <h4>List of existing applications</h4>
 <ul *ngIf="applicationList.length>0; else noApplication "> 
-    <li *ngFor ="let application of applicationList">
+    <li *ngFor ="let application of applicationList, let i = index">
       Name: {{application.applicationName}} 
-      <p>Key: {{application.apiKey.token}} </p>
-      <p>Secret: {{application.apiSecret.token}} </p>
+      <p>Key: {{application.apiKey.token}}  <button (click)="isSecretHidden[i]=!isSecretHidden[i]">show secret</button></p>
+      <p [hidden]='!isSecretHidden[i]'>Secret: {{application.apiSecret.token}} </p>
       <a [routerLink]="['view-api', application.apiKey.token]"[queryParams]="{ secret: application.apiSecret.token, applicationId:application._id }">
        review dataset(link) </a>
        <a [routerLink]="['create-case', application.apiKey.token]">
