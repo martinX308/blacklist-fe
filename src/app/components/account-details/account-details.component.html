@@ -8,16 +8,19 @@
       <p [hidden]='!isSecretHidden[i]'>Secret: {{application.apiSecret.token}} </p>
       <a [routerLink]="['view-api', application.apiKey.token]"[queryParams]="{ secret: application.apiSecret.token, applicationId:application._id }">
        review dataset(link) </a>
-       <a [routerLink]="['create-case', application.apiKey.token]">
-        add fraud case (link) </a>
     </li>
 </ul>
+
+<h4>Manually add a fraud case</h4>
+<div>
+  <app-new-post [applicationList]="applicationList" ></app-new-post>
+</div>  
 
 <ng-template  #noApplication>
   <p>there are no applications yet</p>
 </ng-template>
 
-<h4>New application</h4>
+<h4> Add new application</h4>
 <p>Add a new application and generate an API key</p>
 
 <form (ngSubmit)="submitForm(form)" #form="ngForm" novalidate [ngClass]="{'is-processing': processing}">

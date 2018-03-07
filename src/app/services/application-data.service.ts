@@ -39,5 +39,17 @@ export class ApplicationDataService {
     .toPromise();
   }
   
+  addNewFraudCase (apiKey:string,apiSecret:string,applicationId:string,entry:object):Promise <any> {
+    const keys = btoa(apiKey+":"+apiSecret);
+    const options = {
+      withCredentials: true,
+      headers: {
+        "authorization":keys
+      }
+    };
+    return this.httpClient.post(`${this.MS_URL}/add`,entry, options)
+    .toPromise();
+  }
+
 }
 

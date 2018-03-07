@@ -28,6 +28,7 @@ import { SignupPageComponent } from './pages/signup-page/signup-page.component';
 import { MyViewComponent } from './pages/my-view/my-view.component';
 import { ApplicationPageComponent } from './pages/application-page/application-page.component';
 import { BlacklistEditComponent } from './components/blacklist-edit/blacklist-edit.component';
+import { NewPostComponent } from './components/new-post/new-post.component';
 
 // routes
 const routes: Routes = [
@@ -53,7 +54,8 @@ const routes: Routes = [
     AccountDetailsComponent,
     ApiDescriptionComponent,
     ApplicationPageComponent,
-    BlacklistEditComponent
+    BlacklistEditComponent,
+    NewPostComponent
   ],
   imports: [
     BrowserModule,
