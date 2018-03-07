@@ -13,7 +13,7 @@ export class ApplicationDataService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getApiData (apiKey:string,apiSecret:string): Promise<any> {
+  getApiData (apiKey:string,apiSecret:string,applicationId:string): Promise<any> {
     const keys = btoa(apiKey+":"+apiSecret);
     const options = {
       withCredentials: true,
@@ -22,8 +22,22 @@ export class ApplicationDataService {
       }
     };
   
-    return this.httpClient.get(`${this.MS_URL}/mylog`, options)
+    return this.httpClient.get(`${this.MS_URL}/mylog/${applicationId}`, options)
       .toPromise();
   }
+
+  editBlacklistEntry(apiKey:string,apiSecret:string,applicationId:string,entry:object):Promise <any>{
+    const keys = btoa(apiKey+":"+apiSecret);
+    const options = {
+      withCredentials: true,
+      headers: {
+        "authorization":keys
+      }
+    };
+
+    return this.httpClient.put(`${this.MS_URL}/mylog/${applicationId}/edit`,entry, options)
+    .toPromise();
+  }
+  
 }
 

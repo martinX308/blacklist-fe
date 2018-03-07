@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+
 import {ApplicationDataService} from '../../services/application-data.service';
+import { query } from '@angular/core/src/animation/dsl';
 
 @Component({
   selector: 'app-application-page',
@@ -12,28 +14,55 @@ export class ApplicationPageComponent implements OnInit {
   userId:string;
   apiKey:string;
   apiSecret:string;
-  postings:Array<any>= [];
+  applicationId:string;
+  postings:Array<{}> = [];
+  error = null;
+  isInputHidden:Array<any> = [];
+
 
   constructor(private route: ActivatedRoute, private appService: ApplicationDataService) { }
   
   ngOnInit() {
-    this.route.params
-      .subscribe((params) => this.apiKey = params['token']);
+    
     this.route.queryParams
       .subscribe((queryParams) => {
         this.apiSecret = queryParams['secret'];
+        this.applicationId = queryParams['applicationId'];
     });
     this.route.params
-      .subscribe((params) => this.userId = params['Uid']);
+      .subscribe((params) => {
+        this.apiKey = params['token'];
+        this.userId = params['Uid'];
+        this.getPostedData();
+      });
 
-    this.getPostedData();
   }
 
   getPostedData () {
-    this.appService.getApiData(this.apiKey,this.apiSecret)
+    this.error = '';
+    this.appService.getApiData(this.apiKey,this.apiSecret,this.applicationId)
       .then(result => {
-        console.log(result);
-        this.postings = result;
+        this.postings = result.blacklist;
+        return;
+      })
+      .catch((err) => {
+        this.error = err.error.error; 
       });
   }
+
+  editRequest(editPosting:object){
+    console.log(editPosting["id"] + " "+ editPosting["ddNum"]);
+    
+    this.appService.editBlacklistEntry(this.apiKey,this.apiSecret,this.applicationId,editPosting)
+    .then(result => {
+      console.log(result);
+      this.getPostedData();
+      return;     
+    })
+    .catch((err) => {
+      this.error = err.error.error; 
+    });;
+
+  }
+
 }
