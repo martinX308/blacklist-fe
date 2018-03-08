@@ -1,36 +1,32 @@
-<h4>Logins</h4>
-<form (ngSubmit)="submitForm(form)" #form="ngForm" novalidate [ngClass]="{'is-processing': processing}">
+<div>
+  <h4 class ="center-text">Login:</h4>
+  <form (ngSubmit)="submitForm(form)" #form="ngForm" novalidate [ngClass]="{'is-processing': processing}">
 
-    <div class="field" [ngClass]="{'has-error': feedbackEnabled && usernameField.errors}">
-      <label>Username</label>
-      <input type="text" name="username" [(ngModel)]="username" #usernameField="ngModel" required [disabled]="processing"/>
-      <div *ngIf="feedbackEnabled && usernameField.errors">
-        <p *ngIf="usernameField.errors.required" class="validation">username required</p>
-      </div>
-    </div>
-  
-    <div class="field" [ngClass]="{'has-error': feedbackEnabled && passwordField.errors}">
-        <label>Password</label>
-        <input type="password" name="password" [(ngModel)]="password" #passwordField="ngModel" required [disabled]="processing"/>
-        <div *ngIf="feedbackEnabled && passwordField.errors">
-          <p *ngIf="passwordField.errors.required" class="validation">password required</p>
+      <div class="field" [ngClass]="{'has-error': feedbackEnabled && usernameField.errors}">
+        <label>Username</label>
+        <input class="center-inline" type="text" name="username" [(ngModel)]="username" #usernameField="ngModel" required [disabled]="processing"/>
+        <div *ngIf="feedbackEnabled && usernameField.errors">
+          <p *ngIf="usernameField.errors.required" class="validation">username required</p>
         </div>
-    </div>
-
-    <div class="field submit">
-      <button type="submit" [disabled]="processing">Login</button>
-      <div *ngIf="feedbackEnabled && form.invalid">
-        <p class="validation">there are errors in the form, please review the fields</p>
       </div>
-      <div *ngIf = "error">
-          <p class="validation">Username or password are incorrect</p>
+    
+      <div class="field" [ngClass]="{'has-error': feedbackEnabled && passwordField.errors}">
+          <label>Password</label>
+          <input class="center-inline" type="password" name="password" [(ngModel)]="password" #passwordField="ngModel" required [disabled]="processing"/>
+          <div *ngIf="feedbackEnabled && passwordField.errors">
+            <p *ngIf="passwordField.errors.required" class="validation">password required</p>
+          </div>
+      </div>
+
+      <div class="field submit flex-col">
+        <button class="call-button" type="submit" [disabled]="processing">Login</button>
+        <div *ngIf="feedbackEnabled && form.invalid">
+          <p class="validation">there are errors in the form, please review the fields</p>
         </div>
-    </div>
-</form>
-<p>You don't have an account yet? <a [routerLink]="['/signup']">Signup here</a></p>
-
-
-<!-- <div class="validation" [ngSwitch]="error" *ngIf="error">
-    <div *ngSwitchCase="'not-found'">The username/password are not recongnised</div>
-    <div *ngSwitchDefault>An unexpected error ocurred, please try again</div>
-  </div> -->
+        <div *ngIf = "error">
+            <p class="validation">Username or password are incorrect</p>
+          </div>
+      </div>
+  </form>
+  <p class="center-text">You don't have an account yet? <a [routerLink]="['/signup']">Signup here</a></p>
+</div>

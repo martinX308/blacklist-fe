@@ -39,6 +39,7 @@ export class AccountDetailsComponent implements OnInit {
           console.log(result);
           this.getApplications ();
           this.processing = false;
+        
           // ... handle result, reset form, etc...
           // ... maybe turn this to false if your're staying on the page - this.processing = false;
         })

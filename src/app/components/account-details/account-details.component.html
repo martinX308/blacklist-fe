@@ -1,46 +1,50 @@
+
 <h3>Account - details</h3>
 
-<h4>List of existing applications</h4>
-<ul *ngIf="applicationList.length>0; else noApplication "> 
-    <li *ngFor ="let application of applicationList, let i = index">
-      Name: {{application.applicationName}} 
-      <p>Key: {{application.apiKey.token}}  <button (click)="isSecretHidden[i]=!isSecretHidden[i]">show secret</button></p>
-      <p [hidden]='!isSecretHidden[i]'>Secret: {{application.apiSecret.token}} </p>
-      <a [routerLink]="['view-api', application.apiKey.token]"[queryParams]="{ secret: application.apiSecret.token, applicationId:application._id }">
-       review dataset(link) </a>
-    </li>
-</ul>
+<div class="content-container">
+  <p class="bold">List of existing applications</p>
+  <ul *ngIf="applicationList.length>0; else noApplication "> 
+      <li *ngFor ="let application of applicationList, let i = index">
+        Name: {{application.applicationName}} 
+        <p>Key: {{application.apiKey.token}}  <button (click)="isSecretHidden[i]=!isSecretHidden[i]">show secret</button></p>
+        <p [hidden]='!isSecretHidden[i]'>Secret: {{application.apiSecret.token}} </p>
+        <a [routerLink]="['view-api', application.apiKey.token]"[queryParams]="{ secret: application.apiSecret.token, applicationId:application._id }">
+        review dataset </a>
+      </li>
+  </ul>
+</div>
 
-<h4>Manually add a fraud case</h4>
-<div>
-  <app-new-post [applicationList]="applicationList" ></app-new-post>
+<div class="content-container">
+  <p class="bold">Manually add a fraud case</p>
+  <div class="edit-form">
+    <app-new-post [applicationList]="applicationList" ></app-new-post>
+  </div>
 </div>  
 
 <ng-template  #noApplication>
   <p>there are no applications yet</p>
 </ng-template>
 
-<h4> Add new application</h4>
-<p>Add a new application and generate an API key</p>
 
-<form (ngSubmit)="submitForm(form)" #form="ngForm" novalidate [ngClass]="{'is-processing': processing}">
-
-    <div class="field" [ngClass]="{'has-error': feedbackEnabled && applicationField.errors}">
+<div class="content-container">
+  <p class="bold"> Add new application</p>
+  <form class="flex-row-bottom" (ngSubmit)="submitForm(form)" #form="ngForm" novalidate [ngClass]="{'is-processing': processing}">
+    <div class="" [ngClass]="{'has-error': feedbackEnabled && applicationField.errors}">
       <label>Application name</label>
       <input type="text" name="application" [(ngModel)]="application" #applicationField="ngModel" required [disabled]="processing"/>
       <div *ngIf="feedbackEnabled && applicationField.errors">
         <p *ngIf="applicationField.errors.required" class="validation">application required</p>
       </div>
     </div>
-  
-     <div class="field submit">
+
+    <div class="field submit">
       <button type="submit" [disabled]="processing">Create</button>
       <div *ngIf="feedbackEnabled && form.invalid">
         <p class="validation">there are errors in the form, please review the fields</p>
       </div>
       <div *ngIf = "error">
-          <p class="validation">Username or password are incorrect</p>
-        </div>
+        <p class="validation">Username or password are incorrect</p>
+      </div>
     </div>
-</form>
-  
+  </form>
+</div>

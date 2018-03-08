@@ -8,6 +8,10 @@ form .field {
 	margin-bottom: 20px;
 }
 
+form .field label,input{
+	text-align: center;
+}
+
 form label {
 	display: block;
 	margin-bottom: 10px;
@@ -24,10 +28,12 @@ form .submit {
 }
 
 form .submit button {
-  padding: 5px 20px;
+	padding: 5px 20px;
+	margin:0 auto;
   text-align: center;
   font-size: 16px;
-  background-color: cyan;
+	background-color:rgb(73, 72, 72);
+	color: white;
   cursor: pointer;
 }
 
@@ -38,8 +44,10 @@ form .field.has-error label {
 form .validation {
 	margin: 5px 0 10px;
 	color: red;
+	text-align: center;
 }
 
 form .field.has-error input {
 	border: 1px solid  red;
 }
+

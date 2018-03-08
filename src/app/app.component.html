@@ -2,34 +2,30 @@
 <header id="site-header">
   <div class="container">
 
-    <h1 class="site-title">
-      <!-- <a [routerLink]="['/']"> ....... </a> -->
-    </h1>
-
     <nav class="site-nav">
         <div [ngClass]="{'is-user': user, 'is-anon': anon}">
             <div *ngIf="loading">
               <span class="username text">loading...</span>
             </div>
             <div class="flex-row" *ngIf="!loading && !!user">
-              <span>{{user.username}}</span>
-              <a (click)="logout()">logout</a>
+              <span class="bold">bl@cklist </span>
+              <span>Welcome {{user.username}}</span>
+              <a class="bold logout" (click)="logout()">logout</a>
             </div>
-            <!-- <div *ngIf="!loading && anon">
-              <a [routerLink]="['/contact']"></a>
-            </div> -->
         </div>
     </nav>
 
   </div>
 </header>
 
-<div id="site-main" class="container">
-  <router-outlet></router-outlet>
+<div id="site-main"> 
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
 </div>
 
 <footer id="site-footer">
   <div class="container">
-    <span>Copyright</span>
+    <span>&copy; bl@cklist</span>
   </div>
 </footer>
