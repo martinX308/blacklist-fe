@@ -11,7 +11,7 @@
             <div *ngIf="loading">
               <span class="username text">loading...</span>
             </div>
-            <div *ngIf="!loading && !!user">
+            <div class="flex-row" *ngIf="!loading && !!user">
               <span>{{user.username}}</span>
               <a (click)="logout()">logout</a>
             </div>

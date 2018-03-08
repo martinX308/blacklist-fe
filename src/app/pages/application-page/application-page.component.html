@@ -1,0 +1,25 @@
+
+<a [routerLink]="['/my-view',userId]"> Back to my-view </a>
+
+<table *ngIf = "postings.length > 0; else noRequests">
+  <ng-template ngFor let-post [ngForOf]="postings" let-i="index">
+      <tr>
+        <td>{{post.ddNumber}}</td>
+        <td>{{post.created_at}}</td>
+        <td>{{post.updated_at}}</td>
+        <td>
+            <button (click)="isInputHidden[i]=!isInputHidden[i]">edit</button>
+            <!-- <a [routerLink]="['edit',post._id]"
+            [queryParams]='{ key:apiKey,secret:apiSecret }'>
+            edit </a> -->
+        </td>
+      </tr> 
+      <tr [hidden]="!isInputHidden[i]">
+          <app-blacklist-edit [editPost]="post" (onEdit)="editRequest($event)" (onEdit)="isInputHidden[i]=!isInputHidden[i]"></app-blacklist-edit>
+      </tr> 
+   </ng-template>
+</table>
+
+<ng-template  #noRequests>
+    <p>there is no request data yet</p>
+  </ng-template>

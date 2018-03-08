@@ -1,0 +1,24 @@
+<form (ngSubmit)="submitForm(formApp)" #formApp="ngForm"  [ngClass]="{'is-processing': processing}">
+  <select [(ngModel)]="selectedAppplication" name="selected">
+    <option *ngFor="let application of applicationList" [ngValue]="application">{{application.applicationName}}</option>
+  </select>
+  <p *ngIf="selectedAppplication">You selected: {{selectedAppplication.applicationName}}</p>  
+    
+  <div class="field" [ngClass]="{'has-error': feedbackEnabled && applicationField.errors}">
+      <label>ddNumber</label>
+      <input type="text" name="ddNum" [(ngModel)]="ddNum" #applicationField="ngModel" required [disabled]="processing"/>
+      <div *ngIf="feedbackEnabled && applicationField.errors">
+        <p *ngIf="applicationField.errors.required" class="validation">ddNum required</p>
+      </div>
+    </div>
+  
+     <div class="field submit">
+      <button type="submit" [disabled]="processing">Create</button>
+      <div *ngIf="feedbackEnabled && formApp.invalid">
+        <p class="validation">there are errors in the form, please review the fields</p>
+      </div>
+      <div *ngIf = "error">
+          <p class="validation">Validation of input failed</p>
+      </div>
+    </div>  
+</form>

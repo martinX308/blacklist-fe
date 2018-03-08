@@ -16,6 +16,7 @@ export class AccountDetailsComponent implements OnInit {
   processing = false;
   application: string;
   applicationList:Array <{}> = [];
+  isSecretHidden:Array<any> = [];
 
   constructor(
     private route: ActivatedRoute,

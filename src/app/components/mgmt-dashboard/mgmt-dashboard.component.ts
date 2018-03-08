@@ -46,9 +46,10 @@ export class MgmtDashboardComponent implements OnInit {
         }
         return arrayList;
       },{});
-
+      
       this.apiRequestLog = apiKeyList;
       this.apiList= Object.keys(apiKeyList);
+    
     })
     .catch((err) => {
       this.error = err.error.error; 

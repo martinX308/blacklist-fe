@@ -18,16 +18,24 @@ import { RequireUserGuardService } from './guards/require-user-guard.service';
 import { InitAuthGuardService } from './guards/init-auth-guard.service';
 import { AuthService } from './services/auth.service';
 import {ApplicationGeneratorService} from './services/application-generator.service';
+import {ApplicationDataService} from './services/application-data.service';
+
+
 
 // -- pages
 import { HomepageComponent } from './pages/homepage/homepage.component';
 import { SignupPageComponent } from './pages/signup-page/signup-page.component';
 import { MyViewComponent } from './pages/my-view/my-view.component';
+import { ApplicationPageComponent } from './pages/application-page/application-page.component';
+import { BlacklistEditComponent } from './components/blacklist-edit/blacklist-edit.component';
+import { NewPostComponent } from './components/new-post/new-post.component';
 
 // routes
 const routes: Routes = [
   { path: '',  component: HomepageComponent, canActivate: [ InitAuthGuardService, RequireAnonGuardService] },
   { path: 'signup',  component:SignupPageComponent , canActivate: [ RequireAnonGuardService ] },
+  { path: 'my-view/:Uid/view-api/:token',  component:ApplicationPageComponent  , canActivate: [ RequireUserGuardService ] },
+  { path: 'my-view/:Uid/create-case/:token',  component: ApplicationPageComponent , canActivate: [ RequireUserGuardService ] },
   { path: 'my-view/:Uid',  component: MyViewComponent , canActivate: [ RequireUserGuardService ] },
   { path: '**', redirectTo: '' }
 ];
@@ -44,7 +52,10 @@ const routes: Routes = [
     MyViewComponent,
     MgmtDashboardComponent,
     AccountDetailsComponent,
-    ApiDescriptionComponent
+    ApiDescriptionComponent,
+    ApplicationPageComponent,
+    BlacklistEditComponent,
+    NewPostComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +63,7 @@ const routes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [RequireAnonGuardService, RequireUserGuardService, InitAuthGuardService, AuthService,ApplicationGeneratorService],
+  providers: [RequireAnonGuardService, RequireUserGuardService, InitAuthGuardService, AuthService,ApplicationGeneratorService,ApplicationDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
