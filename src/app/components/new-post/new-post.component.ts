@@ -12,6 +12,7 @@ export class NewPostComponent implements OnInit {
   feedbackEnabled = false;
   error = null;
   processing = false;
+  ddNum: string;
 
   selectedAppplication:object;
 

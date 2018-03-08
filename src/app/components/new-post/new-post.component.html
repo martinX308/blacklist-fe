@@ -6,7 +6,7 @@
     
   <div class="field" [ngClass]="{'has-error': feedbackEnabled && applicationField.errors}">
       <label>ddNumber</label>
-      <input type="text" name="ddNum" #applicationField="ngModel" required [disabled]="processing"/>
+      <input type="text" name="ddNum" [(ngModel)]="ddNum" #applicationField="ngModel" required [disabled]="processing"/>
       <div *ngIf="feedbackEnabled && applicationField.errors">
         <p *ngIf="applicationField.errors.required" class="validation">ddNum required</p>
       </div>
